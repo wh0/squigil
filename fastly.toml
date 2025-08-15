@@ -1,0 +1,47 @@
+# This file describes a Fastly Compute package. To learn more visit:
+# https://www.fastly.com/documentation/reference/compute/fastly-toml
+
+authors = [""]
+cloned_from = "https://github.com/fastly/compute-starter-kit-javascript-empty"
+description = ""
+language = "javascript"
+manifest_version = 3
+name = "squigil"
+service_id = ""
+
+[local_server]
+
+  [local_server.kv_stores]
+
+    [[local_server.kv_stores.stuff]]
+      file = "init/index.js"
+      key = "index.js"
+
+    [[local_server.kv_stores.stuff]]
+      file = "init/public/index.html"
+      key = "public/index.html"
+
+    [[local_server.kv_stores.stuff]]
+      file = "init/admin/index.js"
+      key = "admin/index.js"
+
+[scripts]
+  build = "npm run build"
+  post_init = "npm install"
+
+[setup]
+
+  [setup.kv_stores]
+
+    [setup.kv_stores.stuff]
+
+      [setup.kv_stores.stuff.items]
+
+        [setup.kv_stores.stuff.items."admin/index.js"]
+          file = "init/admin/index.js"
+
+        [setup.kv_stores.stuff.items."index.js"]
+          file = "init/index.js"
+
+        [setup.kv_stores.stuff.items."public/index.html"]
+          file = "init/public/index.html"
