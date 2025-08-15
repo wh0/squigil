@@ -1,0 +1,41 @@
+{
+	"displayName": "Squigil's Home Phone",
+	"icon": "icon.png",
+	"name": "squigil",
+	"version": "1.0.0",
+	"publisher": "wh0",
+	"main": "./browser.js",
+	"browser": "./browser.js",
+	"activationEvents": [
+		"onFileSystem:squigil"
+	],
+	"contributes": {
+		"authentication": [
+			{
+				"label": "Squigil's House",
+				"id": "squigil"
+			}
+		],
+		"commands": [
+			{"command": "wh0.squigil.open_installation", "title": "Drop by Squigil's House"},
+			{"command": "wh0.squigil.asdf", "title": "Mash Buttons on Squigil's Home Phone"}
+		],
+		"configuration": {
+			"title": "Squigil's Home Phone",
+			"properties": {
+				"squigil.adminBaseOverrides": {
+					"type": "object",
+					"additionalProperties": {"type": "string"}
+				}
+			}
+		},
+		"configurationDefaults": {
+			"squigil.adminBaseOverrides": {
+				"127.0.0.1:7676": "http://127.0.0.1:7676/admin/~"
+			}
+		}
+	},
+	"engines": {
+		"vscode": "^1.74.0"
+	}
+}
