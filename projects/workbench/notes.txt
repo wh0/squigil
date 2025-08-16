@@ -1,0 +1,5 @@
+https://update.code.visualstudio.com/api/update/web-standalone/stable/latest
+(look at .version)
+
+https://github.com/microsoft/vscode-test-web/blob/main/views/workbench-esm.html
+https://github.com/microsoft/vscode-test-web/blob/main/src/browser/main.ts
