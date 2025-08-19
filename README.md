@@ -1,6 +1,6 @@
 ![/~/](projects/workbench/init/public/workbench-ext/icon.svg)
 
-☝ This is Squigil.
+☝️ This is Squigil.
 
 And 👇 this is the repo for ...
 
