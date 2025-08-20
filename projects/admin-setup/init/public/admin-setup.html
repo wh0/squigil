@@ -1,0 +1,53 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+	#secret_input {
+		font-family: monospace;
+	}
+	#digest_span {
+		color: #c00040;
+	}
+</style>
+<form id="setup_form">
+	<p><input id="generate_random_button" type="button" value="Generate random"></p>
+	<p><label>Secret<br><input id="secret_input" type="text" size="64"></label></p>
+</form>
+<pre>
+const allowedSecretDigests = {
+	<span id="digest_span"></span>
+};
+</pre>
+<script>
+	const setupForm = document.getElementById('setup_form');
+	const generateRandomButton = document.getElementById('generate_random_button');
+	const secretInput = document.getElementById('secret_input');
+	const digestSpan = document.getElementById('digest_span');
+	function refreshDigest() {
+		const secret = secretInput.value;
+		(async () => {
+			try {
+				const secretDigest = new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(secret))).toString();
+				digestSpan.textContent = `'${secretDigest}': true,`;
+			} catch (e) {
+				reportError(e);
+			}
+		})();
+	}
+	setupForm.onsubmit = (e) => {
+		e.preventDefault();
+		refreshDigest();
+	};
+	generateRandomButton.onclick = (e) => {
+		const randU8 = crypto.getRandomValues(new Uint8Array(32));
+		let randHex = '';
+		for (let i = 0; i < randU8.length; i++) {
+			randHex += randU8[i].toString(16).padStart(2, '0');
+		}
+		secretInput.value = randHex;
+		refreshDigest();
+	};
+	secretInput.oninput = (e) => {
+		refreshDigest();
+	};
+</script>
