@@ -10,6 +10,7 @@ if (/** @type {FetchEvent} */ (fetchEvent).request.method === 'OPTIONS') {
 		},
 	});
 }
+// https://gchq.github.io/CyberChef/#recipe=Pseudo-Random_Number_Generator(32,'Hex')
 // https://gchq.github.io/CyberChef/#recipe=SHA2('256',64,160)From_Hex('None')To_Decimal('Comma',false)
 const allowedSecretDigests = {
 	// '1,2,3': true,
