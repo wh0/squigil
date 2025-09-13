@@ -234,7 +234,7 @@ exports.activate = (/** @type {vscode.ExtensionContext} */ context) => {
 
 	async function sqGetAdminSettings(/** @type {string} */ alias) {
 		if (Object.hasOwn(sqUnwantedAliases, alias)) {
-			throw new Error(`Alias ${alias} unwatned`);
+			throw new Error(`Alias ${alias} unwanted`);
 		}
 		let adminBase;
 		const /** @type {{[alias: string]: string}} */ adminBaseOverrides = vscode.workspace.getConfiguration('squigil').get('adminBaseOverrides', {});
