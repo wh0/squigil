@@ -24,6 +24,7 @@
 		],
 		"commands": [
 			{"command": "wh0.squigil.open_installation", "title": "Drop by Squigil's House"},
+			{"command": "wh0.squigil.preview", "title": "Preview", "icon": "$(link-external)"},
 			{"command": "wh0.squigil.asdf", "title": "Mash Buttons on Squigil's Home Phone"}
 		],
 		"configuration": {
@@ -39,6 +40,27 @@
 			"squigil.adminBaseOverrides": {
 				"127.0.0.1:7676": "http://127.0.0.1:7676/admin/~"
 			}
+		},
+		"menus": {
+			"commandPalette": [
+				{
+					"command": "wh0.squigil.preview",
+					"when": "false"
+				}
+			],
+			"editor/title": [
+				{
+					"command": "wh0.squigil.preview",
+					"group": "navigation",
+					"when": "resourceScheme == squigil && resourcePath =~ /^\\/public\\/|\\/index.js$/"
+				}
+			],
+			"explorer/context": [
+				{
+					"command": "wh0.squigil.preview",
+					"when": "resourceScheme == squigil && resourcePath =~ /^\\/public\\/|\\/index.js$/"
+				}
+			]
 		}
 	},
 	"engines": {

@@ -482,6 +482,26 @@ exports.activate = (/** @type {vscode.ExtensionContext} */ context) => {
 		vscode.workspace.updateWorkspaceFolders(end, 0, {uri: vscode.Uri.from({scheme: 'squigil', authority: session.account.id, path: '/'})});
 	}));
 
+	context.subscriptions.push(vscode.commands.registerCommand('wh0.squigil.preview', async (/** @type {vscode.Uri} */ uri) => {
+		console.log('squigil command preview', uri.toString()); // %%%
+		let path = uri.path;
+		if (path.startsWith('/public/')) {
+			path = path.replace(/^\/public\//, '/');
+			if (path.endsWith('/index.html')) {
+				path = path.replace(/\/index\.html/, '/');
+			}
+		} else if (path.endsWith('/index.js')) {
+			path = path.replace(/\/index\.js$/, '/~/');
+		}
+		const previewUri = vscode.Uri.from({
+			scheme: 'https',
+			authority: uri.authority,
+			path,
+		});
+		const ok = await vscode.env.openExternal(previewUri);
+		if (!ok) throw new Error(`Environment didn't open preview URI ${previewUri}`);
+	}));
+
 	context.subscriptions.push(vscode.commands.registerCommand('wh0.squigil.asdf', async () => {
 		console.log('squigil command asdf'); // %%%
 		for (const alias in sqTrees) {
