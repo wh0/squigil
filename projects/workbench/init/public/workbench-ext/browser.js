@@ -480,7 +480,6 @@ exports.activate = (/** @type {vscode.ExtensionContext} */ context) => {
 			end = vscode.workspace.workspaceFolders.length;
 		}
 		vscode.workspace.updateWorkspaceFolders(end, 0, {uri: vscode.Uri.from({scheme: 'squigil', authority: session.account.id, path: '/'})});
-		console.log('squigil session', session); // %%%
 	}));
 
 	context.subscriptions.push(vscode.commands.registerCommand('wh0.squigil.asdf', async () => {
