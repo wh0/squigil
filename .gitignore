@@ -1,3 +1,5 @@
 /node_modules
 /bin
 /pkg
+
+/projects/workbench/init/public/workbench-ext/*.vsix
