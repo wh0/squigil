@@ -4,6 +4,12 @@
 	"name": "squigil",
 	"version": "1.0.0",
 	"publisher": "wh0",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/wh0/squigil.git",
+		"directory": "projects/workbench/init/public/workbench-ext"
+	},
 	"main": "./browser.js",
 	"browser": "./browser.js",
 	"activationEvents": [
