@@ -7,7 +7,7 @@ const entry = await new /** @type {import('fastly:kv-store')} */ (builtinModules
 if (!entry) return new Response('not found\n', {status: 404});
 let contentType;
 if (key.endsWith('.html')) {
-	contentType = 'text/html';
+	contentType = 'text/html; charset=utf-8';
 } else {
 	contentType = 'application/octet-stream';
 }
