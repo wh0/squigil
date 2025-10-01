@@ -227,7 +227,15 @@ function authenticationSessionFromAdminSecret(/** @type {string} */ alias, /** @
 exports.activate = (/** @type {vscode.ExtensionContext} */ context) => {
 	console.log('squigil enter activate'); // %%%
 
+	const sqUnwantedAliases = {
+		'node_modules': true,
+		'package.json': true,
+	};
+
 	async function sqGetAdminSettings(/** @type {string} */ alias) {
+		if (Object.hasOwn(sqUnwantedAliases, alias)) {
+			throw new Error(`Alias ${alias} unwanted`);
+		}
 		let adminBase;
 		const /** @type {{[alias: string]: string}} */ adminBaseOverrides = vscode.workspace.getConfiguration('squigil').get('adminBaseOverrides', {});
 		if (Object.hasOwn(adminBaseOverrides, alias)) {
