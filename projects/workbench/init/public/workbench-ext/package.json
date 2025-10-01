@@ -61,7 +61,13 @@
 					"when": "resourceScheme == squigil && resourcePath =~ /^\\/public\\/|\\/index.js$/"
 				}
 			]
-		}
+		},
+		"viewsWelcome": [
+			{
+				"view": "explorer",
+				"contents": "[Drop by Squigil's House](command:wh0.squigil.open_installation)"
+			}
+		]
 	},
 	"engines": {
 		"vscode": "^1.74.0"
