@@ -3,12 +3,11 @@ let key = 'public' + innerPath;
 if (key.endsWith('/')) {
 	key += 'index.html';
 }
-console.log('inner path', innerPath, 'key', key);
 const entry = await new /** @type {import('fastly:kv-store')} */ (builtinModules.fastlyKVStore).KVStore('stuff').get(key);
 if (!entry) return new Response('not found\n', {status: 404});
 let contentType;
 if (key.endsWith('.html')) {
-	contentType = 'text/html';
+	contentType = 'text/html; charset=utf-8';
 } else {
 	contentType = 'application/octet-stream';
 }
