@@ -410,15 +410,16 @@ exports.activate = (/** @type {vscode.ExtensionContext} */ context) => {
 				items.push({label: options.account.id, description: 'Requested'});
 			} else {
 				const /** @type {{[alias: string]: true}} */ visitedAliases = {};
+				for (const alias in adminSecrets) {
+					visitedAliases[alias] = true;
+				}
 				for (const alias in sqAuthRequestedAliases) {
-					if (Object.hasOwn(adminSecrets, alias)) continue;
 					if (Object.hasOwn(visitedAliases, alias)) continue;
 					visitedAliases[alias] = true;
 					items.push({label: alias, description: 'Requested'});
 				}
 				const /** @type {{[alias: string]: string}} */ adminBaseOverrides = vscode.workspace.getConfiguration('squigil').get('adminBaseOverrides', {});
 				for (const alias in adminBaseOverrides) {
-					if (Object.hasOwn(adminSecrets, alias)) continue;
 					if (Object.hasOwn(visitedAliases, alias)) continue;
 					visitedAliases[alias] = true;
 					items.push({label: alias, description: 'Has configuration'});
