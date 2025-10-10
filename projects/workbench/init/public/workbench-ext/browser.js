@@ -433,16 +433,30 @@ exports.activate = (/** @type {vscode.ExtensionContext} */ context) => {
 				}
 				items.push(otherItem);
 			}
-			const aliasPicked = await vscode.window.showQuickPick(items, {
-				title: 'Sign In to Squigil\'s House',
-				placeHolder: 'Installation Alias',
-				ignoreFocusOut: true,
+			const aliasQuickPick = vscode.window.createQuickPick();
+			const /** @type {Promise<vscode.QuickPickItem | null>} */ aliasPickedPromised = new Promise((resolve, reject) => {
+				aliasQuickPick.onDidHide(() => {
+					resolve(null);
+				});
+				aliasQuickPick.onDidAccept(() => {
+					resolve(aliasQuickPick.selectedItems[0]);
+				});
 			});
+			aliasQuickPick.items = items;
+			aliasQuickPick.title = 'Sign In to Squigil\'s House';
+			aliasQuickPick.placeholder = 'Installation Alias';
+			aliasQuickPick.ignoreFocusOut = true;
+			aliasQuickPick.show();
+			const aliasPicked = await aliasPickedPromised;
+			const aliasPickedValue = aliasQuickPick.value;
+			aliasQuickPick.dispose();
 			if (!aliasPicked) throw new Error('Cancelled');
 			let alias;
 			if (aliasPicked === otherItem) {
 				const aliasPrompted = await vscode.window.showInputBox({
 					title: 'Sign In to Squigil\'s House',
+					value: aliasPickedValue,
+					valueSelection: [aliasPickedValue.length, aliasPickedValue.length],
 					prompt: 'e.g. squigil.edgecompute.app or 127.0.0.1:7676',
 					placeHolder: 'Installation Alias',
 					ignoreFocusOut: true,
