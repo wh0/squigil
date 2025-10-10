@@ -424,6 +424,12 @@ exports.activate = (/** @type {vscode.ExtensionContext} */ context) => {
 					visitedAliases[alias] = true;
 					items.push({label: alias, description: 'Has configuration'});
 				}
+				const /** @type {{[alias: string]: string}} */ previewBaseOverrides = vscode.workspace.getConfiguration('squigil').get('previewBaseOverrides', {});
+				for (const alias in previewBaseOverrides) {
+					if (Object.hasOwn(visitedAliases, alias)) continue;
+					visitedAliases[alias] = true;
+					items.push({label: alias, description: 'Has configuration'});
+				}
 				items.push({label: 'Other...', alwaysShow: true, other: true});
 			}
 			const aliasPicked = await vscode.window.showQuickPick(items, {
@@ -485,6 +491,13 @@ exports.activate = (/** @type {vscode.ExtensionContext} */ context) => {
 
 	context.subscriptions.push(vscode.commands.registerCommand('wh0.squigil.preview', async (/** @type {vscode.Uri} */ uri) => {
 		console.log('squigil command preview', uri.toString()); // %%%
+		const /** @type {{[alias: string]: string}} */ previewBaseOverrides = vscode.workspace.getConfiguration('squigil').get('previewBaseOverrides', {});
+		let previewBase;
+		if (Object.hasOwn(previewBaseOverrides, uri.authority)) {
+			previewBase = previewBaseOverrides[uri.authority];
+		} else {
+			previewBase = `https://${uri.authority}`;
+		}
 		let path = uri.path;
 		if (path.startsWith('/public/')) {
 			path = path.replace(/^\/public\//, '/');
@@ -494,11 +507,7 @@ exports.activate = (/** @type {vscode.ExtensionContext} */ context) => {
 		} else if (path.endsWith('/index.js')) {
 			path = path.replace(/\/index\.js$/, '/~/');
 		}
-		const previewUri = vscode.Uri.from({
-			scheme: 'https',
-			authority: uri.authority,
-			path,
-		});
+		const previewUri = vscode.Uri.parse(`${previewBase}${path}`);
 		const ok = await vscode.env.openExternal(previewUri);
 		if (!ok) throw new Error(`Environment didn't open preview URI ${previewUri}`);
 	}));

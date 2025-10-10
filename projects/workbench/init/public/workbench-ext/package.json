@@ -33,12 +33,19 @@
 				"squigil.adminBaseOverrides": {
 					"type": "object",
 					"additionalProperties": {"type": "string"}
+				},
+				"squigil.previewBaseOverrides": {
+					"type": "object",
+					"additionalProperties": {"type": "string"}
 				}
 			}
 		},
 		"configurationDefaults": {
 			"squigil.adminBaseOverrides": {
 				"127.0.0.1:7676": "http://127.0.0.1:7676/admin/~"
+			},
+			"squigil.previewBaseOverrides": {
+				"127.0.0.1:7676": "http://127.0.0.1:7676"
 			}
 		},
 		"menus": {
