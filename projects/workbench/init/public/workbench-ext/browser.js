@@ -405,7 +405,8 @@ exports.activate = (/** @type {vscode.ExtensionContext} */ context) => {
 			} else {
 				adminSecrets = {};
 			}
-			const /** @type {(vscode.QuickPickItem & {other?: true})[]} */ items = [];
+			const otherItem = {label: 'Other...', alwaysShow: true};
+			const /** @type {vscode.QuickPickItem[]} */ items = [];
 			if (options.account) {
 				items.push({label: options.account.id, description: 'Requested'});
 			} else {
@@ -430,7 +431,7 @@ exports.activate = (/** @type {vscode.ExtensionContext} */ context) => {
 					visitedAliases[alias] = true;
 					items.push({label: alias, description: 'Has configuration'});
 				}
-				items.push({label: 'Other...', alwaysShow: true, other: true});
+				items.push(otherItem);
 			}
 			const aliasPicked = await vscode.window.showQuickPick(items, {
 				title: 'Sign In to Squigil\'s House',
@@ -439,7 +440,7 @@ exports.activate = (/** @type {vscode.ExtensionContext} */ context) => {
 			});
 			if (!aliasPicked) throw new Error('Cancelled');
 			let alias;
-			if (aliasPicked.other) {
+			if (aliasPicked === otherItem) {
 				const aliasPrompted = await vscode.window.showInputBox({
 					title: 'Sign In to Squigil\'s House',
 					prompt: 'e.g. squigil.edgecompute.app or 127.0.0.1:7676',
