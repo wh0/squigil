@@ -13,6 +13,7 @@ import * as fastlyEnv from 'fastly:env';
 import * as fastlyExperimental from 'fastly:experimental';
 import * as fastlyFanout from 'fastly:fanout';
 import * as fastlyGeolocation from 'fastly:geolocation';
+import * as fastlyHTMLRewriter from 'fastly:html-rewriter';
 import * as fastlyKVStore from 'fastly:kv-store';
 import * as fastlyLogger from 'fastly:logger';
 import * as fastlySecretStore from 'fastly:secret-store';
@@ -32,6 +33,7 @@ const builtinModules = {
 	fastlyExperimental,
 	fastlyFanout,
 	fastlyGeolocation,
+	fastlyHTMLRewriter,
 	fastlyKVStore,
 	fastlyLogger,
 	fastlySecretStore,
