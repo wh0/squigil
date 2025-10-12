@@ -1,0 +1,27 @@
+on:
+  push:
+    tags:
+      - package/*
+jobs:
+  build-package:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - run: npm ci
+      - run: npx fastly compute build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: package
+          path: pkg/squigil.tar.gz
+  release-package:
+    runs-on: ubuntu-24.04
+    needs: build-package
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v5
+        with:
+          name: package
+      - run: gh -R ${{ github.repository }} release create ${{ github.ref_name }} squigil.tar.gz
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
