@@ -1,0 +1,27 @@
+on:
+  push:
+    tags:
+      - workbench-ext/*
+jobs:
+  build-workbench-ext:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - run: npx @vscode/vsce@3 package
+        working-directory: projects/workbench/init/public/workbench-ext
+      - uses: actions/upload-artifact@v4
+        with:
+          name: workbench-ext
+          path: projects/workbench/init/public/workbench-ext/squigil-*.vsix
+  release-workbench-ext:
+    runs-on: ubuntu-24.04
+    needs: build-workbench-ext
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v5
+        with:
+          name: workbench-ext
+      - run: gh -R ${{ github.repository }} release create ${{ github.ref_name }} squigil-*.vsix
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
