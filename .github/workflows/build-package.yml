@@ -13,9 +13,22 @@ jobs:
         with:
           name: package
           path: pkg/squigil.tar.gz
-  release-package:
+  attest-package:
     runs-on: ubuntu-24.04
     needs: build-package
+    permissions:
+      id-token: write
+      attestations: write
+    steps:
+      - uses: actions/download-artifact@v5
+        with:
+          name: package
+      - uses: actions/attest-build-provenance@v3
+        with:
+          subject-path: squigil.tar.gz
+  release-package:
+    runs-on: ubuntu-24.04
+    needs: attest-package
     permissions:
       contents: write
     steps:
