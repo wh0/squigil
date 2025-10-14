@@ -13,9 +13,22 @@ jobs:
         with:
           name: workbench-ext
           path: projects/workbench/init/public/workbench-ext/squigil-*.vsix
-  release-workbench-ext:
+  attest-workbench-ext:
     runs-on: ubuntu-24.04
     needs: build-workbench-ext
+    permissions:
+      id-token: write
+      attestations: write
+    steps:
+      - uses: actions/download-artifact@v5
+        with:
+          name: workbench-ext
+      - uses: actions/attest-build-provenance@v3
+        with:
+          subject-path: squigil-*.vsix
+  release-workbench-ext:
+    runs-on: ubuntu-24.04
+    needs: attest-workbench-ext
     permissions:
       contents: write
     steps:
