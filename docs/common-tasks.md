@@ -78,7 +78,7 @@
    	...,
    }
    ```
-   See the code https://github.com/wh0/squigil/blob/05e163985725701ab9a5a982adc390dbe4412d91/src/index.js#L63 in case this gets out of date.
+   See the code [src/index.js:65](../src/index.js#L65) in case this gets out of date.
 1. Now you should be able to go to e.g. `https://???.edgecompute.app/info/~/` and see some JSON.
 
 ## Running some code as the admin
@@ -104,5 +104,5 @@
    }
    searchParams: URLSearchParams
    ```
-   See the code https://github.com/wh0/squigil/blob/05e163985725701ab9a5a982adc390dbe4412d91/init/admin/index.js#L28 in case this gets out of date.
+   See the code [init/admin/index.js:28](../init/admin/index.js#L28) in case this gets out of date.
 1. That should give the response constructed by the code, which is the message `hi`.
