@@ -1,6 +1,6 @@
 # Gradual start
 
-1. Have a proper enough development computer, one with npm etc. for running the Fastly CLI. This is only for this setup, and you don't need to be at this computer to develop stuff later. I am interested whether this is possible to do without a full development environment, but I have not looked into it.
+1. Have a proper enough development computer, one with npm etc. for running the Fastly CLI. This is only for this setup, and you don't need to be at this computer to develop stuff later. It is possible to do this without a full development environment, see [On-the-web start](manage-start.md) if you don't mind that it's fiddly.
 2. Get the [source code](..).
 3. Go to https://squigil.edgecompute.app/admin-setup.html, click generate.
 4. Save the secret somewhere.
