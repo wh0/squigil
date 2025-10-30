@@ -1,4 +1,6 @@
-| quality | CLI+Viceroy | Squigil's House |
+# Comparison with Fastly CLI
+
+| quality | Fastly CLI | Squigil's House |
 |--|--|--|
 | time overhead to run updated code | a few seconds, I can handle it. the js sdk doesn't do much compilation. there's only wizer and whatever viceroy's startup delay is | feels like less than a second. note that I've only tried editing and viewing in the same region |
 | where development happens | on a certain computer. may be a remote computer that you connect to from multiple computers, possibly with a subscription fee | any computer, in web browser. have to log in though |

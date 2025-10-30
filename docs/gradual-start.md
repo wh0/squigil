@@ -1,4 +1,4 @@
-## Gradual start
+# Gradual start
 
 1. Have a proper enough development computer, one with npm etc. for running the Fastly CLI. This is only for this setup, and you don't need to be at this computer to develop stuff later. I am interested whether this is possible to do without a full development environment, but I have not looked into it.
 2. Get the source code https://github.com/wh0/squigil.

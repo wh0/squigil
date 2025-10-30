@@ -1,3 +1,5 @@
+# Common tasks
+
 ## Making a web page
 
 1. Right-click the `public` directory.
