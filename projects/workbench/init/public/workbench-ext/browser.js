@@ -457,7 +457,7 @@ exports.activate = (/** @type {vscode.ExtensionContext} */ context) => {
 					title: 'Sign In to Squigil\'s House',
 					value: aliasPickedValue,
 					valueSelection: [aliasPickedValue.length, aliasPickedValue.length],
-					prompt: 'e.g. squigil.edgecompute.app or 127.0.0.1:7676',
+					prompt: 'e.g. <SUBDOMAIN>.edgecompute.app or 127.0.0.1:7676',
 					placeHolder: 'Installation Alias',
 					ignoreFocusOut: true,
 				});
