@@ -63,8 +63,8 @@ cd ..
 awk '$1 == "real" { print $2; }' fastly-cli-output.txt
 
 cd squigil
-SQUIGIL_DOMAIN=squigil.edgecompute.app \
-SQUIGIL_ADMIN_SECRET=your_admin_secret \
+SQUIGIL_DOMAIN='<SUBDOMAIN>.edgecompute.app' \
+SQUIGIL_ADMIN_SECRET='<ADMIN_SECRET>' \
 ./time.sh 2>&1 | tee ../squigil-output.txt
 cd ..
 awk '$1 == "real" { print $2; }' squigil-output.txt

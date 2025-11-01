@@ -15,7 +15,7 @@
    +	ay
    +</p>
    ```
-1. Open that file on your site without the `public/` part, e.g. at `https://???.edgecompute.app/note.html`.
+1. Open that file on your site without the `public/` part, e.g. at `https://<SUBDOMAIN>.edgecompute.app/note.html` for your subdomain _SUBDOMAIN_.
 
 ## Adding resources
 
@@ -46,7 +46,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
    +<link rel="stylesheet" href="note.css">
    ```
-1. Check the page, e.g. at `https://???.edgecompute.app/note.html`, and it should be using the external stylesheet.
+1. Check the page, e.g. at `https://<SUBDOMAIN>.edgecompute.app/note.html`, and it should be using the external stylesheet.
 
 ## Making a dynamic page
 
@@ -79,19 +79,19 @@
    }
    ```
    See the code [src/index.js:65](../src/index.js#L65) in case this gets out of date.
-1. Now you should be able to go to e.g. `https://???.edgecompute.app/info/~/` and see some JSON.
+1. Now you should be able to go to e.g. `https://<SUBDOMAIN>.edgecompute.app/info/~/` and see some JSON.
 
 ## Running some code as the admin
 
 1. You make a POST request to `/admin/~/eval` like this:
    ```sh
-   SQUIGIL_ADMIN_SECRET=your_admin_secret \
+   SQUIGIL_ADMIN_SECRET='<ADMIN_SECRET>' \
    curl \
    	--variable %SQUIGIL_ADMIN_SECRET \
    	--variable 'body=return new Response('"'"'hi\n'"'"');' \
    	-X POST \
    	--expand-header 'Authorization: Bearer {{SQUIGIL_ADMIN_SECRET}}' \
-   	--expand-url 'https://???.edgecompute.app/admin/~/eval?body={{body:url}}'
+   	--expand-url 'https://<SUBDOMAIN>.edgecompute.app/admin/~/eval?body={{body:url}}'
    ```
    That, similar to the dynamic page, runs some code as the body of an async function with some arguments given, and it should return a `Response`.
    Currently the arguments are:
